@@ -1,10 +1,17 @@
-import { Button, Card, Form, Input } from "antd";
+import { Button, Card, Form, Input, message } from "antd";
 import './index.scss';
 import logo from '@/assets/logo.png';
+import { useDispatch } from "react-redux";
+import { fetchLogin } from "@/store/modules/user";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const onFinish = (value) => {
-    console.log(value);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const onFinish = async (value) => {
+    await dispatch(fetchLogin(value));
+    navigate('/');
+    message.success('登录成功');
   }
   return (
     <div className="login">
